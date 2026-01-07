@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>미디액트 사운드 스튜디오 | 표용수</title>
+  <meta name="description" content="독립영화 사운드 믹싱 · 포스트사운드 | 미디액트 사운드 스튜디오 | 표용수" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="미디액트 사운드 스튜디오 | 표용수" />
+  <meta property="og:description" content="독립영화 사운드 믹싱 · 포스트사운드 | 컨셉 · 히스토리 · 작품 · 인터뷰" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#0b0c0f;
+      --fg:#f4f4f5;
+      --muted:rgba(244,244,245,.72);
+      --line:rgba(244,244,245,.14);
+      --card:rgba(244,244,245,.04);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --max: 1060px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(255,255,255,.06), transparent 55%),
+                  radial-gradient(900px 500px at 100% 0%, rgba(255,255,255,.05), transparent 60%),
+                  var(--bg);
+      color:var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Helvetica, Arial, "Segoe UI Emoji";
+      line-height:1.5;
+      letter-spacing:-0.2px;
+    }
+    a{color:inherit; text-decoration:none}
+    a:hover{opacity:.92}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+
+    /* top nav */
+    .topbar{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,12,15,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .brand{
+      display:flex; flex-direction:column; gap:2px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .brand small{font-weight:600; color:var(--muted); letter-spacing:.4px}
+    nav{
+      display:flex; gap:18px; align-items:center;
+      font-size:14px; color:var(--muted);
+      white-space:nowrap;
+    }
+    nav a{padding:8px 10px; border-radius:12px}
+    nav a:hover{background: rgba(244,244,245,.06); color:var(--fg)}
+    .nav-right{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(244,244,245,.02);
+      color:var(--fg);
+      font-size:14px;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{background: rgba(244,244,245,.06); transform: translateY(-1px)}
+    .btn.primary{
+      background: rgba(244,244,245,.10);
+      border-color: rgba(244,244,245,.22);
+    }
+
+    /* hero */
+    .hero{
+      padding:72px 0 34px;
+    }
+    .hero h1{
+      margin:0;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    .hero p{
+      margin:18px 0 0;
+      max-width: 720px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .hero .cta{
+      margin-top:26px;
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .meta{
+      margin-top:18px;
+      display:flex; gap:12px; flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(244,244,245,.03);
+    }
+    .dot{width:6px; height:6px; border-radius:99px; background: rgba(244,244,245,.65); display:inline-block}
+
+    /* sections */
+    section{padding:56px 0; border-top:1px solid var(--line)}
+    section:first-of-type{border-top:0}
+    .sec-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:18px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .sec-head h2{margin:0; font-size:24px; letter-spacing:-.6px}
+    .sec-head .sub{color:var(--muted); font-size:14px; max-width:560px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .pad{padding:18px}
+    .lead{font-size:16px; color:var(--muted); margin:0}
+    .kicker{font-size:12px; color:rgba(244,244,245,.55); letter-spacing:.4px; text-transform:uppercase}
+
+    /* concept */
+    .concept .card{grid-column: span 6}
+    .concept ul{margin:12px 0 0; padding:0 0 0 18px; color:var(--muted)}
+    .concept li{margin:8px 0}
+
+    /* history */
+    .timeline{grid-column: span 12}
+    .timeline .items{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .titem{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(244,244,245,.02);
+    }
+    .titem strong{min-width:74px; display:inline-block}
+    .titem span{color:var(--muted)}
+
+    /* works */
+    .works .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin: 10px 0 18px;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(244,244,245,.02);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip.active{background: rgba(244,244,245,.10); color: var(--fg); border-color: rgba(244,244,245,.22)}
+    .work-card{grid-column: span 4; min-height:220px; display:flex; flex-direction:column}
+    .work-thumb{
+      aspect-ratio: 3 / 4;
+      background:
+        linear-gradient(135deg, rgba(244,244,245,.10), rgba(244,244,245,.02)),
+        radial-gradient(500px 200px at 20% 0%, rgba(244,244,245,.10), transparent 60%),
+        rgba(244,244,245,.03);
+      border-bottom: 1px solid var(--line);
+      display:flex; align-items:flex-end;
+      padding:14px;
+    }
+    .work-thumb .ph{
+      font-size:12px; color: rgba(244,244,245,.65);
+      border:1px dashed rgba(244,244,245,.22);
+      padding:8px 10px; border-radius:12px;
+      background: rgba(0,0,0,.15);
+    }
+    .work-body{padding:14px}
+    .work-title{margin:0; font-size:15px}
+    .work-meta{margin:8px 0 0; font-size:13px; color:var(--muted)}
+    .work-links{margin-top:auto; padding:0 14px 14px; display:flex; gap:10px; flex-wrap:wrap}
+    .link{
+      font-size:13px; color: var(--fg);
+      border:1px solid var(--line);
+      background: rgba(244,244,245,.02);
+      padding:8px 10px;
+      border-radius:12px;
+    }
+
+    /* media */
+    .media .mcard{grid-column: span 6}
+    .embed{
+      aspect-ratio: 16 / 9;
+      width:100%;
+      border:0;
+      display:block;
+      background: rgba(0,0,0,.25);
+    }
+    .media .pad p{margin:10px 0 0; color:var(--muted); font-size:14px}
+
+    /* footer */
+    footer{
+      padding:28px 0 44px;
+      border-top:1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot-row{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* responsive */
+    @media (max-width: 980px){
+      .concept .card{grid-column: span 12}
+      .work-card{grid-column: span 6}
+      .media .mcard{grid-column: span 12}
+      nav{display:none}
+    }
+    @media (max-width: 560px){
+      .work-card{grid-column: span 12}
+      .topbar .row{gap:10px}
+      .brand{max-width:65%}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <a class="brand" href="#top" aria-label="home">
+          <div>MEDIACT SOUND STUDIO <span style="opacity:.65">|</span> <span style="font-weight:800">PYO YONGSU</span></div>
+          <small>미디액트 사운드 스튜디오 · 표용수</small>
+        </a>
+
+        <nav aria-label="sections">
+          <a href="#concept">컨셉</a>
+          <a href="#history">히스토리</a>
+          <a href="#works">작품</a>
+          <a href="#media">인터뷰/영상</a>
+          <a href="#links">링크</a>
+        </nav>
+
+        <div class="nav-right">
+          <a class="btn" href="#works">SEE MORE</a>
+          <a class="btn primary" href="https://www.kmdb.or.kr/db/per/00019139/filmo" target="_blank" rel="noopener">KMDb 필모</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div class="kicker">Turning films into experiences</div>
+      <h1>독립영화 사운드 믹싱<br/>포스트사운드</h1>
+      <p>
+        영화의 감정선이 무너지지 않게. 대사·공간·리듬을 기준으로 정리하고,
+        과한 티 없이 “끝까지 보기 편한 사운드”를 목표로 합니다.
+      </p>
+
+      <div class="cta">
+        <a class="btn primary" href="#works">대표작 / 포스터 보기</a>
+        <a class="btn" href="#media">인터뷰 / 영상 보기</a>
+        <a class="btn" href="https://www.kmdb.or.kr/db/per/00019139/filmo" target="_blank" rel="noopener">필모그래피(KMDb)로 이동</a>
+      </div>
+
+      <div class="meta" aria-label="quick facts">
+        <span class="pill"><span class="dot"></span> 미디액트 기반</span>
+        <span class="pill"><span class="dot"></span> 사운드 슈퍼바이즈 / 믹싱</span>
+        <span class="pill"><span class="dot"></span> 인디 장편·단편 중심</span>
+      </div>
+    </div>
+
+    <section id="concept" class="concept">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>컨셉</h2>
+          <div class="sub">업무 안내/행정 내용은 빼고, “어떤 톤으로 작업하는지”만 간결하게 보여주는 페이지.</div>
+        </div>
+
+        <div class="grid">
+          <article class="card pad">
+            <div class="kicker">Approach</div>
+            <h3 style="margin:8px 0 0; letter-spacing:-.4px">티 안 나게, 하지만 확실하게</h3>
+            <p class="lead" style="margin-top:10px">
+              소리로 설명하지 않고, 영화 자체가 말하게 만드는 쪽을 선호합니다.
+              정답을 찍기보다, 작품이 요구하는 기준(톤/거리/공간/리듬)을 먼저 잡습니다.
+            </p>
+            <ul>
+              <li>대사 명료도: 말이 “안 들리는 순간”부터 제거</li>
+              <li>공간감: 화면의 거리·렌즈·호흡과 맞추기</li>
+              <li>리듬: 컷과 연기의 속도를 해치지 않기</li>
+            </ul>
+          </article>
+
+          <article class="card pad">
+            <div class="kicker">Philosophy</div>
+            <h3 style="margin:8px 0 0; letter-spacing:-.4px">독립영화에 맞는 현실적인 완성</h3>
+            <p class="lead" style="margin-top:10px">
+              소스 컨디션이 들쭉날쭉해도 “영화가 전달해야 하는 감정”은 지켜야 하니까,
+              가능한 선에서 가장 자연스럽고 안정적인 결과를 만듭니다.
+            </p>
+            <ul>
+              <li>과도한 보정으로 “인공 느낌” 나지 않게</li>
+              <li>감독/편집의 의도와 충돌하지 않게</li>
+              <li>극장/온라인 등 최종 상영 환경 고려</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="history">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>히스토리</h2>
+          <div class="sub">연도별로 길게 나열하기보다, “전환점” 위주로 짧게 정리 (아래 항목은 네가 수정하면 됨)</div>
+        </div>
+
+        <div class="grid">
+          <div class="card pad timeline">
+            <div class="kicker">Milestones</div>
+            <div class="items" id="timeline"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="works" class="works">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>작품 포스터</h2>
+          <div class="sub">포스터 이미지는 네가 파일/링크로 채워 넣으면 카드가 그대로 살아나게 구성.</div>
+        </div>
+
+        <div class="toolbar" id="filters" aria-label="work filters"></div>
+
+        <div class="grid" id="workGrid" aria-label="works grid"></div>
+      </div>
+    </section>
+
+    <section id="media" class="media">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>인터뷰 / 영상</h2>
+          <div class="sub">유튜브 영상 ID만 바꾸면 바로 임베드돼. (인터뷰 기사 링크는 카드로 같이 붙임)</div>
+        </div>
+
+        <div class="grid" id="mediaGrid" aria-label="media grid"></div>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="wrap">
+        <div class="sec-head">
+          <h2>링크</h2>
+          <div class="sub">필모/프로필은 KMDb로 연결. (원하면 여기만 따로 더 깔끔하게 정리해도 됨)</div>
+        </div>
+
+        <div class="grid">
+          <div class="card pad" style="grid-column: span 12;">
+            <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between">
+              <div>
+                <div class="kicker">Filmography</div>
+                <div style="font-size:16px; margin-top:6px">KMDb 표용수 필모그래피</div>
+                <div style="color:var(--muted); font-size:14px; margin-top:6px">
+                  작품 리스트/크레딧은 KMDb 기준으로 연결합니다.
+                </div>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap">
+                <a class="btn primary" href="https://www.kmdb.or.kr/db/per/00019139/filmo" target="_blank" rel="noopener">KMDb 필모 바로가기</a>
+                <a class="btn" href="#top">맨 위로</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-row">
+          <div>© <span id="y"></span> MEDIACT SOUND STUDIO | PYO YONGSU</div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <!-- 여기 연락처는 원하면 넣고, 싫으면 지워도 됨 -->
+            <span>Contact: <span style="opacity:.75">your@email.com</span></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ✅ 여기만 바꾸면 콘텐츠가 그대로 사이트에 반영돼요.
+
+    // 1) 히스토리(전환점 위주로 짧게)
+    const TIMELINE = [
+      { year: "—", text: "독립영화 포스트사운드 작업을 중심으로 활동" },
+      { year: "—", text: "미디액트 사운드 스튜디오 기반으로 작업 확장" },
+      { year: "—", text: "장편/단편/다큐 등 다양한 포맷의 믹싱 및 슈퍼바이징" },
+      // { year: "2024", text: "예) 대표작 ○○○ / ○○○" },
+    ];
+
+    // 2) 작품 포스터(이미지 링크가 있으면 poster에 넣고, 없으면 비워둬도 됨)
+    // poster: "https://...jpg" (직접 업로드 후 경로를 넣거나, 본인 소유 이미지 링크만 추천)
+    // links: 트레일러/기사/포트폴리오 페이지 등
+    const WORKS = [
+      { title: "작품명 1", year: "2024", role: "Sound Supervisor / Mix", type: "장편", poster: "", links: [{label:"트레일러", url:"#"}] },
+      { title: "작품명 2", year: "2023", role: "Mix", type: "단편", poster: "", links: [{label:"인터뷰", url:"#"}] },
+      { title: "작품명 3", year: "2023", role: "Sound Design", type: "다큐", poster: "", links: [{label:"기사", url:"#"}] },
+      { title: "작품명 4", year: "2022", role: "Mix", type: "장편", poster: "", links: [] },
+      { title: "작품명 5", year: "2021", role: "Dialogue / Mix", type: "단편", poster: "", links: [] },
+      { title: "작품명 6", year: "2020", role: "Sound", type: "기타", poster: "", links: [] },
+    ];
+
+    // 3) 인터뷰/영상
+    // youtubeId만 넣으면 자동 임베드
+    const MEDIA = [
+      { title: "인터뷰/영상 1", desc: "짧은 설명 한 줄", youtubeId: "dQw4w9WgXcQ", linkLabel: "관련 링크", linkUrl: "#" },
+      { title: "인터뷰/영상 2", desc: "짧은 설명 한 줄", youtubeId: "dQw4w9WgXcQ", linkLabel: "기사", linkUrl: "#" },
+    ];
+
+    // --------- render ----------
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // timeline
+    const tl = document.getElementById("timeline");
+    tl.innerHTML = TIMELINE.map(i => `
+      <div class="titem">
+        <strong>${escapeHtml(i.year)}</strong>
+        <span>${escapeHtml(i.text)}</span>
+      </div>
+    `).join("");
+
+    // works filters
+    const types = ["전체", ...Array.from(new Set(WORKS.map(w => w.type)))];
+    const filters = document.getElementById("filters");
+    let active = "전체";
+
+    filters.innerHTML = types.map(t => `<div class="chip ${t==="전체" ? "active" : ""}" data-type="${escapeAttr(t)}">${escapeHtml(t)}</div>`).join("");
+    filters.addEventListener("click", (e) => {
+      const chip = e.target.closest(".chip");
+      if(!chip) return;
+      active = chip.dataset.type;
+      [...filters.querySelectorAll(".chip")].forEach(c => c.classList.toggle("active", c.dataset.type === active));
+      renderWorks();
+    });
+
+    function renderWorks(){
+      const grid = document.getElementById("workGrid");
+      const list = (active==="전체") ? WORKS : WORKS.filter(w => w.type === active);
+
+      grid.innerHTML = list.map(w => `
+        <article class="card work-card">
+          <div class="work-thumb" style="${w.poster ? `background-image:url('${escapeAttr(w.poster)}'); background-size:cover; background-position:center;` : ""}">
+            ${w.poster ? "" : `<div class="ph">POSTER</div>`}
+          </div>
+          <div class="work-body">
+            <h3 class="work-title">${escapeHtml(w.title)}</h3>
+            <div class="work-meta">${escapeHtml(w.year)} · ${escapeHtml(w.type)} · ${escapeHtml(w.role)}</div>
+          </div>
+          <div class="work-links">
+            ${(w.links||[]).slice(0,3).map(l => `<a class="link" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join("")}
+          </div>
+        </article>
+      `).join("");
+
+      if(list.length === 0){
+        grid.innerHTML = `<div class="card pad" style="grid-column: span 12; color: var(--muted);">표시할 작품이 없어요.</div>`;
+      }
+    }
+    renderWorks();
+
+    // media
+    const mg = document.getElementById("mediaGrid");
+    mg.innerHTML = MEDIA.map(m => `
+      <article class="card mcard">
+        <iframe
+          class="embed"
+          src="https://www.youtube.com/embed/${escapeAttr(m.youtubeId)}"
+          title="${escapeAttr(m.title)}"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+        <div class="pad">
+          <div class="kicker">Video / Interview</div>
+          <div style="font-size:16px; margin-top:8px">${escapeHtml(m.title)}</div>
+          <p>${escapeHtml(m.desc || "")}</p>
+          ${m.linkUrl ? `<a class="btn" style="margin-top:10px" href="${escapeAttr(m.linkUrl)}" target="_blank" rel="noopener">${escapeHtml(m.linkLabel || "관련 링크")}</a>` : ""}
+        </div>
+      </article>
+    `).join("");
+
+    // helpers
+    function escapeHtml(str){
+      return String(str ?? "").replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+    function escapeAttr(str){
+      return escapeHtml(str).replace(/`/g, "&#96;");
+    }
+  </script>
+</body>
+</html>
